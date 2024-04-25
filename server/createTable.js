@@ -6,13 +6,19 @@ const pool = new Pool({
   password: "dbtraining",
   host: "localhost",
   port: 5432,
-  database: "postgres",
+  database: "db_login_practice",
 });
 
+const createTableQuery = `CREATE TABLE accounts (
+  user_id serial PRIMARY KEY,
+  username VARCHAR (50) UNIQUE NOT NULL,
+  password VARCHAR (50) NOT NULL);
+`
+
 pool
-  .query("CREATE DATABASE db_login_practice;")
+  .query(createTableQuery)
   .then((response) => {
-    console.log("Database created");
+    console.log("Table Created");
     console.log("response", response);
   })
   .catch((error) => {
